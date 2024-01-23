@@ -6,7 +6,7 @@ const path = require('path');
 
 // obtener canciones
 const getCanciones = async () => {
-    const fsResponse = await fs.readFile('./canciones.json', 'utf-8');
+    const fsResponse = await fs.readFile('canciones.json', 'utf-8');
     const canciones = JSON.parse(fsResponse);
     console.log('Read de canciones.json exitosa.');
     return canciones;
@@ -25,7 +25,7 @@ router.get('/canciones', async (req, res) => {
 
 // agregar cancion
 router.post("/canciones", async (req, res) => {
-    let data = await fs.readFile("./canciones.json", 'utf-8');
+    let data = await fs.readFile("canciones.json", 'utf-8');
     let canciones = JSON.parse(data);
     canciones.push(req.body);
     await fs.writeFile("canciones.json", JSON.stringify(canciones));
@@ -34,7 +34,7 @@ router.post("/canciones", async (req, res) => {
 
 // editar cancion
 router.put("/canciones/:id", async (req, res) => {
-    let data = await fs.readFile("./canciones.json", 'utf-8');
+    let data = await fs.readFile("canciones.json", 'utf-8');
     let canciones = JSON.parse(data);
     let index = canciones.findIndex((c) => c.id == req.params.id);
     canciones[index] = req.body;
@@ -44,7 +44,7 @@ router.put("/canciones/:id", async (req, res) => {
 
 // eliminar cancion
 router.delete("/canciones/:id", async (req, res) => {
-    let data = await fs.readFile("./canciones.json", 'utf-8');
+    let data = await fs.readFile("canciones.json", 'utf-8');
     let canciones = JSON.parse(data);
     let index = canciones.findIndex((c) => c.id == req.params.id);
     canciones.splice(index, 1);

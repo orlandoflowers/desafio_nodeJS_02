@@ -35,6 +35,10 @@ async function getData() {
 }
 
 function nuevaCancion() {
+  if (!cancion.value || !artista.value || !tono.value) {
+    alert("Por favor, completa todos los campos antes de agregar una nueva canción.");
+    return;
+  }
   cancion;
   artista;
   tono;
