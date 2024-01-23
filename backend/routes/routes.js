@@ -29,7 +29,7 @@ router.post("/canciones", async (req, res) => {
     let canciones = JSON.parse(data);
     canciones.push(req.body);
     await fs.writeFile("canciones.json", JSON.stringify(canciones));
-    res.json({ message: "Canción agregada" });
+    res.send("Canción agregada exitosamente");
 });
 
 // editar cancion
@@ -39,7 +39,7 @@ router.put("/canciones/:id", async (req, res) => {
     let index = canciones.findIndex((c) => c.id == req.params.id);
     canciones[index] = req.body;
     await fs.writeFile("canciones.json", JSON.stringify(canciones));
-    res.json({ message: "Canción editada" });
+    res.send("Canción editada");
 });
 
 // eliminar cancion
@@ -49,7 +49,7 @@ router.delete("/canciones/:id", async (req, res) => {
     let index = canciones.findIndex((c) => c.id == req.params.id);
     canciones.splice(index, 1);
     await fs.writeFile("canciones.json", JSON.stringify(canciones));
-    res.json({ message: "Canción eliminada" });
+    res.send("Canción eliminada");
 });
 
 module.exports = router;
